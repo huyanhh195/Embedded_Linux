@@ -24,7 +24,7 @@ void log_message(log_level_t level, const string& message){
     strftime(timestamp, sizeof(timestamp),"%Y-%m-%d %H:%M:%S", timeinfo);
 
     ostringstream logEntry;
-    logEntry << "[" << timestamp << "] " << log_level_to_string(level) << " -" << message << endl;
+    logEntry << "[" << timestamp << "] [" << log_level_to_string(level) << "]" << message << endl;
 
     // output to console
     // cout << logEntry.str();

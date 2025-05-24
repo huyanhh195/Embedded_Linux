@@ -10,7 +10,7 @@ int main(){
 
         // log
         cout << "Counting: " << cnt << endl;
-        log_message(INFO, " " + to_string(cnt));
+        log_message(INFO, " Counting: " + to_string(cnt));
         
         if (cnt >= NUMBER_COUNTS){
             break;
