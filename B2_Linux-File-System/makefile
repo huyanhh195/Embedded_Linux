@@ -2,12 +2,16 @@ PN1 := bai1
 PN2 := bai2
 PN3 := bai3
 
+BASE_DIR := .
+BAI1_DIR := ${BASE_DIR}/bai1
+BAI2_DIR := ${BASE_DIR}/bai2
+
 all:
-	gcc -o ${PN1} main.c
-	gcc -o ${PN2} bai2.c
-	gcc -o ${PN3} bai3.c
-	@echo "Comiled Successfully"
+	gcc -o ${BAI1_DIR}/${PN1} ${BAI1_DIR}/main.c
+	gcc -o ${BAI2_DIR}/${PN2} ${BAI2_DIR}/main.c
+	# gcc -o ${PN3} bai3.c
+	@echo "Compiled Successfully"
 
 clean: 
-	rm -f ${PN1} ${PN2} ${PN2} *.txt
+	rm -f ${BAI1_DIR}/${PN1} ${BAI2_DIR}/${PN2} ${BAI2_DIR}/*.txt
 	clear
