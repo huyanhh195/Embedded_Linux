@@ -1,0 +1,2 @@
+Trạng thái orphan xảy ra khi tiến trình cha kết thúc trước tiến trình con, khi đó tiến trình con sẽ được tiến trình có pid = 1 quản lí
+Trạng thái zombie xảy ra khi tiến trình con kết thức trước tiến trình cha, mà tiến trình cha chưa kịp gọi wait() hoặc waitpid() do đó tiến trình con vẫn lưu giữ pid và trạng thái kết thúc của mình không bị hệ điều hành giải phóng
