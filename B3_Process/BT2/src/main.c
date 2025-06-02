@@ -14,15 +14,19 @@ int main(int argc, char *argv[]){
 
     if (child_pid != -1){
         if (child_pid == 0){
-            if(*argv[1] == '1'){
-                execlp("/usr/bin/ls", "ls", "-l", NULL);
-            }
-            else if (*argv[1] == '2')
-            {
-                execlp("/usr/bin/date", "date", "-I", NULL);
-            }
-            else{
-                printf("No thing\n");
+            while(1){
+                printf("In the children process\n");
+                if(*argv[1] == '1'){
+                    execlp("/usr/bin/ls", "ls", "-l", NULL);
+                }
+                else if (*argv[1] == '2')
+                {
+                    execlp("/usr/bin/date", "date", "-I", NULL);
+                }
+                else{
+                    printf("No thing\n");
+                }
+                sleep(1);
             }
 
             while(1){
@@ -36,8 +40,6 @@ int main(int argc, char *argv[]){
 
             while(1){
                 printf("In the parent process\n");
-                // if( wait(&status) > 0)
-                //     break;
                 sleep(5);
             }
         }

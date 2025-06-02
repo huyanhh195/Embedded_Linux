@@ -1,0 +1,1 @@
+Khi hàm exec được gọi thì nó sẽ thay thế tiến trình hiện tại bằng chương trình dược gọi bên trong hàm exec
