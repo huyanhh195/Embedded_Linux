@@ -1,0 +1,1 @@
+Nếu không xử lý tín hiệu SIGTSTP và người dùng nhấn Ctrl+Z thì chương trình sẽ bị dừng
