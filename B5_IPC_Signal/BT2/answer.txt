@@ -1,0 +1,1 @@
+Hàm alarm chỉ đăng kí 1 lần, do đó nếu không gọi alarm trong hàm xử lí thì sẽ không có SIGALRM
