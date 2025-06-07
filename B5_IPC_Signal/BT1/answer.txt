@@ -1,0 +1,1 @@
+Nếu bỏ qua tín hiệu SIGINT, khi nhấn CTRL+C tiến trình sẽ dược giải phóng ngay lập tức
