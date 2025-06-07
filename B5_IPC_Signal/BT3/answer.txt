@@ -1,0 +1,3 @@
+Sử dụng kill để giao tiếp giữa hai tiến trình vì hai tiến trình cha và con là hai tiến trình riêng biệt, 
+do đó có hai vùng địa chỉ riêng biệt không thể giao tiếp dữ liệu hai tiến trình, phải dùng signal
+để  giao tiếp giữa hai tiến trình
