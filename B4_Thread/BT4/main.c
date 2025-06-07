@@ -2,7 +2,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <time.h>
-
+#include <stdlib.h>
 #define ARR_SIZE 100
 #define ODD_MODE 1
 #define EVEN_MODE 2

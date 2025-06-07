@@ -2,7 +2,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <time.h>
-
+#include <stdlib.h>
 // declare global variables
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;

@@ -15,7 +15,7 @@ all: clean
 	gcc -o ${BT4_DIR}/${PN} ${BT4_DIR}/${PN}.c -lpthread
 	gcc -o ${BT5_DIR}/${PN} ${BT5_DIR}/${PN}.c -lpthread
 	gcc -o ${BT6_DIR}/${PN} ${BT6_DIR}/${PN}.c -lpthread
-
+	@echo "============= Complie done ============="
 clean:
 	rm -rf ${BT1_DIR}/${PN} ${BT2_DIR}/${PN} ${BT3_DIR}/${PN} ${BT4_DIR}/${PN} ${BT5_DIR}/${PN} ${BT6_DIR}/${PN}
 	clear
