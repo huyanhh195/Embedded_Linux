@@ -1,0 +1,18 @@
+SERVER_NAME := server
+CLIENT_NAME := client
+
+BASE_DIR = .
+IP4_STREAM_DIR = $(BASE_DIR)/ip4_stream
+
+
+all: clean build
+
+build:
+	gcc $(IP4_STREAM_DIR)/${SERVER_NAME}.c -o $(IP4_STREAM_DIR)/${SERVER_NAME}
+	gcc $(IP4_STREAM_DIR)/${CLIENT_NAME}.c -o $(IP4_STREAM_DIR)/${CLIENT_NAME}
+
+	@echo "Compile done"
+clean:
+	rm -rf $(IP4_STREAM_DIR)/${SERVER_NAME} $(IP4_STREAM_DIR)/${CLIENT_NAME} 
+	clear
+	@echo "clean up done"
