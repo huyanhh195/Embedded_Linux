@@ -5,7 +5,7 @@ BASE_DIR = .
 IP4_STREAM_DIR = $(BASE_DIR)/ip4_stream
 IP4_DGRAM_DIR = $(BASE_DIR)/ip4_datagram
 UNIX_STREAM_DIR = $(BASE_DIR)/unix_stream
-
+UNIX_DGRAM_DIR = $(BASE_DIR)/unix_datagram
 
 all: clean build
 
@@ -18,10 +18,14 @@ build:
 
 	gcc $(UNIX_STREAM_DIR)/${SERVER_NAME}.c -o $(UNIX_STREAM_DIR)/${SERVER_NAME}
 	gcc $(UNIX_STREAM_DIR)/${CLIENT_NAME}.c -o $(UNIX_STREAM_DIR)/${CLIENT_NAME}
+
+	gcc $(UNIX_DGRAM_DIR)/${SERVER_NAME}.c -o $(UNIX_DGRAM_DIR)/${SERVER_NAME}
+	gcc $(UNIX_DGRAM_DIR)/${CLIENT_NAME}.c -o $(UNIX_DGRAM_DIR)/${CLIENT_NAME}
 	@echo "Compile done"
 clean:
 	rm -rf $(IP4_STREAM_DIR)/${SERVER_NAME} $(IP4_STREAM_DIR)/${CLIENT_NAME} 
 	rm -rf $(IP4_DGRAM_DIR)/${SERVER_NAME} $(IP4_DGRAM_DIR)/${CLIENT_NAME} 
 	rm -rf $(UNIX_STREAM_DIR)/${SERVER_NAME} $(UNIX_STREAM_DIR)/${CLIENT_NAME} 
+	rm -rf $(UNIX_DGRAM_DIR)/${SERVER_NAME} $(UNIX_DGRAM_DIR)/${CLIENT_NAME} 
 	clear
 	@echo "clean up done"
