@@ -74,7 +74,8 @@ stage4: ${LIB_BUILD_TARGET}
 	@echo "---------------------------------------------------------------------"
 	@echo "Linking"
 
-	g++ $(BUILD_DIR)/main.o ${LIB_OUTPUT} -l${LOG_LIB_NAME} -o $(BIN_DIR)/$(PN)
+	# g++ $(BUILD_DIR)/main.o ${LIB_OUTPUT} -l${LOG_LIB_NAME} -o $(BIN_DIR)/$(PN)
+	g++ $(BUILD_DIR)/main.o ${LIB_OUTPUT} -l${LOG_LIB_NAME}  -Wl,-rpath=$(LIB_SHARED_DIR) -o $(BIN_DIR)/$(PN)
 
 	@echo "Linking done"
 	@echo "---------------------------------------------------------------------"	
@@ -91,6 +92,7 @@ static_lib:
 
 	@echo "Created static library"
 	@echo "---------------------------------------------------------------------"	
+	
 #
 # Create shared library
 #

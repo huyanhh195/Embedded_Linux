@@ -1,12 +1,5 @@
 #pragma once
 
-/* ********************************************************************************** */
-//
-// logging Level: DEBUG, INFO, ERROR and CRITICAL
-//
-/* ********************************************************************************** */
-
-// include libs
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -17,7 +10,9 @@
 
 using namespace std;
 
-// enum log leves
+static const string LOG_PATH = "logs/log.txt";
+extern ofstream logFile; 
+
 enum log_level_t {
     DEBUG, 
     INFO, 
@@ -26,17 +21,20 @@ enum log_level_t {
     CRITICAL 
 };
 
-static const string LOG_PATH = "logs/log.txt";
+class Logger {
+private:
 
-// Create a log file
-void create_log_file(const string& file_name = LOG_PATH);
+    // Fuction to create log file
+    void create_log_file(const string& file_name);
 
-// Log a message
-void log_message(log_level_t level, const std::string& message);
+    // Chane log level to string
+    string log_level_to_string(log_level_t level);
+    
+public:
 
-// chane log level to string
-string log_level_to_string(log_level_t level);
+    Logger(const string& file_name = LOG_PATH);
+    ~Logger();
 
-extern ofstream logFile; 
-
-// MU_LOGGING_H
+    // Fuction to log message
+    void log_message(log_level_t level, const std::string& message);
+};

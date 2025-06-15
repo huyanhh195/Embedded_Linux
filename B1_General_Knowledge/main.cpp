@@ -1,36 +1,40 @@
 #include "utils.hpp"
 
+int flag_run = true;
+
 int main(){
-    create_log_file();
-    // log_message(DEBUG, "test");
-    signal(SIGINT, singal_handler);
-
     int cnt = 0;
-    while(program_running){
+    Logger logger;       
 
-        // log
+    signal(SIGINT, signal_handler);
+
+    while(flag_run){
+        
         cout << "Counting: " << cnt << endl;
-        log_message(INFO, " Counting: " + to_string(cnt));
+        logger.log_message(INFO, " Counting: " + to_string(cnt));
         
         if (cnt >= NUMBER_COUNTS){
             break;
         }
 
-        // Increase the counter
         cnt += 1;
         
         sleep(1);
     }
 
-    cout << "Done" << endl;
-    log_message(WARNING, " Done");
-    log_message(WARNING, " **********************");
-    logFile.close();
+    // check if receive SIGINT signal
+    if (!flag_run){
+        cout << "Exiting with signal" << endl;
+        logger.log_message(WARNING, " Exiting with signal");
+    }
 
+    cout << "Done" << endl;
+    logger.log_message(WARNING, " Done");
+    logger.log_message(WARNING, " **********************");
+    
     return 0;
 }   
 
-void singal_handler(int signal){
-    program_running = false;
-    log_message(WARNING, " Exiting with signal");
+void signal_handler(int signal){
+    flag_run = false;
 }

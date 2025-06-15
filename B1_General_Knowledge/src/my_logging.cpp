@@ -1,12 +1,17 @@
 #include "my_logging.hpp"
 ofstream logFile; 
 
-void create_log_file(const string& file_name){
+Logger::Logger(const string& file_name){
+    create_log_file(file_name);
+}
 
+Logger::~Logger(){
+    logFile.close();
+}
+
+void Logger::create_log_file(const string& file_name){
     logFile.open(file_name, ios::app);
-    // Create the file
     if (logFile.is_open()) {
-        // logFile.close();
         cout << "Created log file with name " << file_name << endl;
     }
     else {
@@ -14,23 +19,19 @@ void create_log_file(const string& file_name){
     }
 }
 
-void log_message(log_level_t level, const string& message){
-    //get current time 
+void Logger::log_message(log_level_t level, const string& message){
+    // Get current time 
     time_t now = time(0);
     tm* timeinfo = localtime(&now);
 
-    // format the time
+    // Format the time
     char timestamp[20];
     strftime(timestamp, sizeof(timestamp),"%Y-%m-%d %H:%M:%S", timeinfo);
 
+    // Construct the log entry string
     ostringstream logEntry;
     logEntry << "[" << timestamp << "] [" << log_level_to_string(level) << "]" << message << endl;
 
-    // output to console
-    // cout << logEntry.str();
-
-    // outtput to log file
-    // logFile.open(ios::app);
     if(logFile.is_open()){
         logFile << logEntry.str();
         logFile.flush();
@@ -41,8 +42,9 @@ void log_message(log_level_t level, const string& message){
 }
 
 
-string log_level_to_string(log_level_t level){
+string Logger::log_level_to_string(log_level_t level){
     string level_string;
+
     switch (level){
         case DEBUG:
             level_string = "DEBUG";
@@ -63,5 +65,6 @@ string log_level_to_string(log_level_t level){
             level_string = "UNKNOWN";
             break;
     }
+
     return level_string;
 }

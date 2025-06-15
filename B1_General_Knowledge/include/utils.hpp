@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include "my_logging.hpp"
 
-void singal_handler(int signal);
+#define NUMBER_COUNTS 10
 
-int program_running = true;
-int NUMBER_COUNTS = 10;
+void signal_handler(int signal);
+
