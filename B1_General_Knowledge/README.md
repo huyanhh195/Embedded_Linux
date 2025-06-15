@@ -23,11 +23,20 @@ g++ -c main.s -o main.o
 g++ -o main main.o
 ```
 
-### ✅ `make all` : Build executable file
+### ✅ `make` : Build executable file with static lib
+Build everything into the final binary.
+
+### ✅ `make BUILD_SHARED=1` : Build executable file with dynamic lib
 Build everything into the final binary.
 
 ### 🧹 `make clean` : Clean everything
 Remove all build artifacts: `.o`, `.i`, `.s`, `.a`, `.so`, binary files, etc.
+
+## How to run
+
+```bash
+./logging
+```
 
 ---
 
@@ -76,10 +85,6 @@ gcc -shared bin/shared/add.o bin/shared/answer.o -o bin/shared/libtq84.so
 
 > ⚠️ Make sure to compile object files with `-fPIC` when building shared libraries.  
 > Otherwise, you’ll get an error like:
-
-```
-/usr/bin/ld: bin/add.o: relocation R_X86_64_PC32 against symbol `gSummand' can not be used when making a shared object; recompile with -fPIC
-```
 
 ---
 
