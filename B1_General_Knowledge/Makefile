@@ -13,7 +13,6 @@ LIB_DIR := ${BASE_DIR}/libs
 LIB_SHARED_DIR := ${LIB_DIR}/shared
 LIB_STATIC_DIR := ${LIB_DIR}/static
 
-
 ifeq ($(BUILD_SHARED),1)
 	LIB_BUILD_TARGET := shared_lib
 	LIB_OUTPUT := -L${LIB_SHARED_DIR}
@@ -23,14 +22,23 @@ else
 endif
 
 #
+# Build excutable file
+#
+all: clean create_folder stage3 stage4
+	@echo "---------------------------------------------------------------------"	
+	cp -r ${BIN_DIR}/${PN} ${BASE_DIR}
+
+	@echo "Build complete"
+	@echo "---------------------------------------------------------------------"	
+
+#
 # Step Pre-Compiling
 #
-stage1: $(SRC_DIR)/main.cpp 
+stage1: $(BASE_DIR)/main.cpp 
 	@echo "---------------------------------------------------------------------"
 	@echo "Preprocessing"
 
-	# g++ -E $(SRC_DIR)/${LOG_LIB_NAME}.cpp -I $(INC_DIR)/ -o  $(BUILD_DIR)/${LOG_LIB_NAME}.i
-	g++ -E $(SRC_DIR)/main.cpp -o $(BUILD_DIR)/main.i -I$(INC_DIR)/
+	g++ -E $(BASE_DIR)/main.cpp -o $(BUILD_DIR)/main.i -I$(INC_DIR)/
 
 	@echo "Preprocessing done"	
 	@echo "---------------------------------------------------------------------"
@@ -41,7 +49,6 @@ stage2: stage1
 	@echo "---------------------------------------------------------------------"
 	@echo "Compiling"
 
-	# g++ -S $(BUILD_DIR)/${LOG_LIB_NAME}.i -o $(BUILD_DIR)/${LOG_LIB_NAME}.s
 	g++ -S $(BUILD_DIR)/main.i -o $(BUILD_DIR)/main.s
 
 	@echo "Compile done"
@@ -54,7 +61,6 @@ stage3: stage1 stage2
 	@echo "---------------------------------------------------------------------"
 	@echo "Assembling"
 
-	# g++ -c $(BUILD_DIR)/${LOG_LIB_NAME}.s -o $(BUILD_DIR)/${LOG_LIB_NAME}.o
 	g++ -c $(BUILD_DIR)/main.s -o $(BUILD_DIR)/main.o
 
 	@echo "Assembly done"
@@ -71,15 +77,6 @@ stage4: ${LIB_BUILD_TARGET}
 	g++ $(BUILD_DIR)/main.o ${LIB_OUTPUT} -l${LOG_LIB_NAME} -o $(BIN_DIR)/$(PN)
 
 	@echo "Linking done"
-	@echo "---------------------------------------------------------------------"	
-#
-# Build excutable file
-#
-all: clean stage1 stage2 stage3 stage4
-	@echo "---------------------------------------------------------------------"	
-
-
-	@echo "Build complete"
 	@echo "---------------------------------------------------------------------"	
 
 #
@@ -107,17 +104,24 @@ shared_lib:
 	@echo "Created shared library"
 	@echo "---------------------------------------------------------------------"	
 
+create_folder:
+	mkdir -p $(BUILD_DIR)
+	mkdir -p $(BIN_DIR)
+	mkdir -p $(LOG_DIR)
+	mkdir -p ${LIB_SHARED_DIR}
+	mkdir -p ${LIB_STATIC_DIR}
+
 #
 # Clean the project
 #
 clean:
 	@echo "---------------------------------------------------------------------"	
 
-	rm -rf $(BUILD_DIR)/*
-	rm -rf $(BIN_DIR)/*
-	rm -rf $(LOG_DIR)/*
-	rm -rf ${LIB_SHARED_DIR}/*
-	rm -rf ${LIB_STATIC_DIR}/*
+	rm -rf $(BUILD_DIR)
+	rm -rf $(BIN_DIR)
+	rm -rf $(LOG_DIR)
+	rm -rf ${LIB_DIR}
+	rm -rf ${BASE_DIR}/${PN}
 	clear
 	
 	@echo "Cleaned up"
