@@ -1,4 +1,4 @@
-# IPC SIGNAL
+# THREAD
 
 ## How to run
 1. Comile
@@ -8,6 +8,6 @@ make
 Which will create file bin in each folder
 2. Run with format
 ```bash
-./BTx/main
+./main
 ```
 where x from 1 to 6

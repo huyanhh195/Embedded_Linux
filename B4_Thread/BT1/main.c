@@ -12,19 +12,18 @@ void *funcThread2(void *arg){
 }
 
 int main(){
-    // Crete 2 threads
     pthread_t thread1 = 0, thread2 = 0;
 
     if (pthread_create(&thread1, NULL, funcThread1, NULL)){
         printf("Error creating thread 1\n");
         return 1;
     }
+
     if (pthread_create(&thread2, NULL, funcThread2, NULL)){
         printf("Error creating thread 2\n");
         return 1; 
     }
 
-    // wait for the threads to finish
     pthread_join(thread1, NULL);
     pthread_join(thread2, NULL);
 

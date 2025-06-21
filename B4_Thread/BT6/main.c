@@ -9,6 +9,7 @@
 #define I_AM_THREAD_1 1
 #define I_AM_THREAD_2 2 
 #define I_AM_THREAD_3 3
+#define NUMBER_THREAD 4
 
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 int idx = 0;
@@ -24,6 +25,8 @@ void *funcThread(void *arg){
     pthread_mutex_lock(&lock);
     
     thread_data_t *data = (thread_data_t *)arg;
+    pthread_t thread_id = pthread_self();
+    
     if(data->id == I_AM_THREAD_0){
         for(int i = 0; i < STEP_SIZE; i++){
             sum += data->arr[i];
@@ -50,52 +53,30 @@ void *funcThread(void *arg){
 }
 int main(){
     long arr[ARR_SIZE] = {0};
-    pthread_t thread_0 = 0, thread_1 = 0, thread_2 = 0, thread_3 = 0;
+    pthread_t thread[NUMBER_THREAD] = {0};
+    thread_data_t data_thread[4] = {0};
 
-    // Set array
+    // sum reference
     for (long i = 0; i < ARR_SIZE; i++) {
         arr[i] = i;
         sum_ref += i;
     }
 
-    thread_data_t data_thread_0 = {0};
-    thread_data_t data_thread_1 = {0};
-    thread_data_t data_thread_2 = {0};
-    thread_data_t data_thread_3 = {0};
-
-    data_thread_0.id = I_AM_THREAD_0;
-    data_thread_0.arr = arr;
-    data_thread_1.id = I_AM_THREAD_1;
-    data_thread_1.arr = arr;
-    data_thread_2.id = I_AM_THREAD_2;
-    data_thread_2.arr = arr;
-    data_thread_3.id = I_AM_THREAD_3;
-    data_thread_3.arr = arr;
-
-
-    // Create 4 threads
-    if(pthread_create(&thread_0, NULL, funcThread, &data_thread_0)){
-        printf("Error creating thread 0\n");
-        return 1;
-    }
-    if(pthread_create(&thread_1, NULL, funcThread, &data_thread_1)){
-        printf("Error creating thread 1\n");
-        return 1;
-    }
-    if(pthread_create(&thread_2, NULL, funcThread, &data_thread_2)){
-        printf("Error creating thread 2\n");
-        return 1;
-    }
-    if(pthread_create(&thread_3, NULL, funcThread, &data_thread_3)){
-        printf("Error creating thread 3\n");
-        return 1;
+    for(int i = 0; i < 4; i++){
+        data_thread[i].id = i;
+        data_thread[i].arr = arr;
     }
 
-    // wait for the threads to finish
-    pthread_join(thread_0, NULL);
-    pthread_join(thread_1, NULL);
-    pthread_join(thread_2, NULL);
-    pthread_join(thread_3, NULL);
+    for(int i = 0; i < NUMBER_THREAD; i++){
+        if(pthread_create(&thread[i], NULL, funcThread, &data_thread[i])){
+            printf("Error creating thread %d\n", i);
+            return 1;
+        }
+    }
+
+    for(int i = 0; i < NUMBER_THREAD; i++){
+        pthread_join(thread[i], NULL);
+    }
 
     printf("======================================================================\n");
     printf("Sum Reference is: %ld\n", sum_ref);
