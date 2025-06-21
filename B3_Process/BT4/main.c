@@ -12,6 +12,7 @@ int return_random_status(){
     int value = rand() % 2;
 
     printf("The children process return value: %d\n", value);
+
     return value;
 }
 
@@ -28,15 +29,16 @@ int main(){
             while (1)
             {
                 printf("The process children is running with pid: %d\n", getpid());
+
                 sleep(1);
             }
             #endif
             
             int status = return_random_status();
+            
             exit(status);
         }
         
-        // parent process
         else{
             int status = 0;
             
@@ -49,6 +51,7 @@ int main(){
             // Check the exit status 1 if the children process terminated normally
             if(WIFEXITED(status)){
                 int exit_status =  WEXITSTATUS(status);
+
                 printf("The children process terminated normally with exit status: %d\n", exit_status);
             }
             else{
@@ -59,5 +62,6 @@ int main(){
     else{
         printf("Fork failed\n");
     }
+
     return 0;
 }

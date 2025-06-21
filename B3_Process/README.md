@@ -33,7 +33,7 @@ make USE_EXEC=1 USE_SIGKILL=1
 Each folder `BT1`, `BT2`, ..., `BT5` contains specific examples. To run them:
 
 ```bash
-./BTx/main
+.main
 ```
 Where `x` is a number from `1` to `4`.
 
@@ -41,12 +41,12 @@ Where `x` is a number from `1` to `4`.
 
 - To demonstrate **orphan process**:
   ```bash
-  ./BT5/orphan
+  ./orphan
   ```
 
 - To demonstrate **zombie process**:
   ```bash
-  ./BT5/zombie
+  ./zombie
   ```
 
 ---

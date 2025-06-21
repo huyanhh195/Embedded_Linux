@@ -15,11 +15,14 @@ int main(){
     if (child_pid >= 0){
         if (child_pid == 0){
             printf("Hello from children process with pid: %d and my parent have pid: %d\n", getpid(), getppid());
+
             sleep(5);
+
             printf("Hello from children process with pid: %d and my new parent have pid: %d\n", getpid(), getppid());
 
             for(int i =0; i < TIME_DELAY; i++){
                 printf("Hello from orphan process\n");
+
                 sleep(1);
             }
         }
@@ -27,11 +30,13 @@ int main(){
         // parent process
         else{
             printf("Hello from parent process with pid: %d and my children have pid: %d\n", getpid(), child_pid);
+            
             sleep(1);
         }
     }
     else{
         printf("Fork failed\n");
     }
+
     return 0;
 }
