@@ -4,22 +4,24 @@
 - make clean: clean everything.
 
 ## How to run:
-### With bai1:
+### Compile 
+Each folder contains a Makefile. To run it, use:
 ```bash
-./bai1/bai1
+make
 ```
-### With bai2:
+### Run file bin
+After compilation, execute the program with
+```bash
+./main
+```
+### Special case: BT2
 #### write data to file 
 ```bash
- ./bai2/bai2 filename numb_bytes w data_want_write
+ ./main filename numb_bytes w data_want_write
  ```
 #### read data to file 
 ```bash
-/bai2/bai2 filename numb_bytes r data_want_write
- ```
-### With bai3:
- ```bash
-./bai3/bai3
+./main filename numb_bytes r 
  ```
 
 ## References

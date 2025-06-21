@@ -8,9 +8,7 @@
 
 int main(int argc, char *argv[])
 {
-    char *filename = "bai3/bai3.txt";
-
-    // get file infor
+    char *filename = "bai3.txt";
     struct stat sb;
 
     if (stat(filename, &sb) == -1) {

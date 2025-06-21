@@ -1,1 +1,0 @@
-Mặc dù trong chương trình ở dòng 19, có sử dụng seek(fd, 0, SEEK_SET) để set con trỏ về vị trí đầu file nhưng do có cờ O_APPEND chỉ được ghi tiếp ở vị trí con trỏ hiện tại 
