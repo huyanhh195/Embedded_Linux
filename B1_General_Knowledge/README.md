@@ -29,14 +29,27 @@ g -o main main.o
 ### ✅ `make` : Build executable file with static lib
 Build everything into the final binary.
 
-### ✅ `make BUILD_SHARED=1` : Build executable file with dynamic lib
-Build everything into the final binary.
+### ✅ `make static` : Build executable file with dynamic lib
+Build the static 
+
+### ✅ `make shared` : Build executable file with dynamic lib
+Build the shared 
 
 ### 🧹 `make clean` : Clean everything
 Remove all build artifacts: `.o`, `.i`, `.s`, `.a`, `.so`, binary files, etc.
 
 ```bash
-./app_logging
+./main_static
+./main_shared
+```
+
+### Test case
+```bash
+reverse hello
+trim       abc   
+trim       
+toint 12345
+exit
 ```
 
 ---

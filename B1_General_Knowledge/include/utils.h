@@ -3,6 +3,7 @@
 #include <unistd.h>
 
 #include "logging.h"
+#include "strutils.h"
 
 #define DEFAULT_LOG_PATH "./logs/logging.txt"
 #define TIME_SLEEP       100000
