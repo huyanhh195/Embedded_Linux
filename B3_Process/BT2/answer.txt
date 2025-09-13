@@ -1,0 +1,4 @@
+When child process finishes exec() successfully:
+ - Address space replaces: old code, data, heap and stack are discarded
+ - New program loaded: executable (ls, date ...) is mapped into the memory process
+ - PID unchanged

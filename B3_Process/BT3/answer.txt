@@ -1,0 +1,13 @@
+1. Concept
+Orphan process occurs when the parent process terminates first, while the child process is still running. The orphan child is then adopted by init (or systemd).
+Zombie process occurs when the child process terminates first, but the parent process has not yet called wait() to collect its exit status. The child remains in the process table as a zombie until the parent reaps it.
+
+2. Significance
+Orphan process: 
+ - Ensures that every process always has a parent.
+ - Prevents resource leaks and keeps process management consistent.
+
+Zombie process:
+ - The kernel must keep its exit status and termination information in the process table.
+ - Without this mechanism, the parent would never know the child’s outcome.
+
