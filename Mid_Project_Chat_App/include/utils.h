@@ -5,6 +5,7 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <pthread.h>
+#include <signal.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,9 +39,11 @@ typedef enum
 typedef struct
 {
     struct sockaddr_in addr;
+    bool               active;
     int                socket_fd;
     int                port;
     int                id;
+    pthread_t          thread_recv;
     char               ip[INET_ADDRSTRLEN];
 } peer_info_t;  // bytes
 
@@ -62,7 +65,7 @@ void show_help();
 /**
  * @brief Display the local IP address.
  */
-void show_ip();
+char* get_ip();
 
 /**
  * @brief Display the local port number.
@@ -111,6 +114,12 @@ bool check_valid_port(const char* str_port);
 bool init_socket(socket_info_t* sock, int port);
 
 /**
+ * @brief Remove and clean up all inactive peers.
+ * @param sock Pointer to socket info structure.
+ */
+void cleanup_inactive_peers(socket_info_t* sock);
+
+/**
  * @brief Thread to continuously accept new incoming connections.
  * @param arg Pointer to socket_info_t.
  * @return NULL
@@ -151,3 +160,9 @@ void handle_cmd_send(char* str);
  * @param times Time to sleep in milliseconds.
  */
 void msleep(int times);
+
+/**
+ * @brief handle SIGINT signal
+ * @param sig Signal number
+ */
+void signal_handler(int sig);
