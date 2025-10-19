@@ -11,14 +11,14 @@ int main()
     shm_fd = shm_open(name, O_CREAT | O_RDWR, 0666);
     if (shm_fd == 1)
     {
-        perror("Failed to create shared memory object");
+        perror("shm_open");
         return 1;
     }
 
     // Set size of shared memory object
     if (ftruncate(shm_fd, SIZE) == -1)
     {
-        perror("Failed to set size of shared memory object");
+        perror("ftruncate");
         return 1;
     }
 
@@ -26,7 +26,7 @@ int main()
     ptr = mmap(0, SIZE, PROT_WRITE, MAP_SHARED, shm_fd, 0);
     if (ptr == MAP_FAILED)
     {
-        perror("Failed to map shared memory object");
+        perror("mmap");
         return 1;
     }
 

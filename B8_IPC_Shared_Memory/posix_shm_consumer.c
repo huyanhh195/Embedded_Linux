@@ -11,7 +11,7 @@ int main()
     shm_fd = shm_open(name, O_RDONLY, 0666);
     if (shm_fd == -1)
     {
-        perror("Failed to open shared memory object");
+        perror("shm_open");
         return 1;
     }
 
@@ -19,7 +19,7 @@ int main()
     ptr = mmap(0, SIZE, PROT_READ, MAP_SHARED, shm_fd, 0);
     if (ptr == MAP_FAILED)
     {
-        perror("Failed to map shared memory object");
+        perror("mmap");
         return 1;
     }
 
@@ -35,7 +35,7 @@ int main()
 
     if (shm_unlink(name) == -1)
     {
-        perror("Failed to unlink shared memory object");
+        perror("shm_unlink");
         return 1;
     }
 
